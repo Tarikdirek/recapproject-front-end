@@ -1,23 +1,64 @@
 <div *ngIf="dataLoaded==false" class="spinner-border text-warning" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
-<table *ngIf="dataLoaded != false" class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>BrandName</th>
-            <th>ColorName</th>
-            <th>Description</th>
-            <th>Model Year</th>
-            <th>Daily Price</th>
-        </tr>
-    </thead>
-    <tr *ngFor="let car of cars">
-        <td>{{car.carId}}</td>
-        <td>{{car.brandId}}</td>
-        <td>{{car.colorId}}</td>
-        <td>{{car.description}}</td>
-        <td>{{car.modelYear}}</td>
-        <td>{{car.dailyPrice}}</td>
-    </tr>
-</table>
+
+
+  <div class="row mt-4" style="margin-left: 1%">
+    <div
+      *ngFor="let car of carDetails"
+      class="card mt-2 mr-2"
+      style="width: 18rem; margin-right: 10px"
+    >
+      <img
+        *ngIf="car.imagePath"
+        [src]="baseUrl + car.imagePath"
+        class="card-img-top"
+        style="object-fit: cover"
+        width="100"
+        height="50%"
+      />
+  
+      <img
+        *ngIf="!car.imagePath"
+        [src]="baseUrl + 'default-car.jpg'"
+        class="card-img-top"
+        style="object-fit: cover"
+        width="100"
+        height="50%"
+      />
+  
+      <div class="card-body">
+        <h4 class="cart-title">{{ car.brandName }}</h4>
+      </div>
+  
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <i><b>Model Year | </b></i>{{ car.modelYear }}
+        </li>
+        <li class="list-group-item">
+          <i><b>Brand | </b></i>{{ car.brandName }}
+        </li>
+        <li class="list-group-item">
+          <i><b>Color | </b></i>{{ car.colorName }}
+        </li>
+        <li class="list-group-item">
+          <i><b>Description | </b></i>{{ car.description }}
+        </li>
+        <li class="list-group-item">
+          <i><b>Daily Price: </b></i>{{ car.dailyPrice + " ₺" }}
+        </li>
+      </ul>
+  
+      <div class="card-body">
+        <div class="row">
+          <button
+            type="button"
+            class="btn btn-success"
+            routerLink="/cars/cardetails/{{ car.carId }}"
+          >
+            Car Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

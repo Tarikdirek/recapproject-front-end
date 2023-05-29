@@ -1,26 +1,52 @@
-<div *ngIf="dataLoaded==false" class="spinner-border text-warning" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
+<div
+*ngFor="let car of carDetails"
+class="card mt-2 mr-2"
+style="width: 26rem; margin-right: 10px"
+>
+<img
+  *ngIf="car.imagePath"
+  [src]="baseUrl+car.imagePath"
+  class="card-img-top"
+  style="object-fit: cover"
+  width="100"
+  height="70%"
+/>
 
-  <div class="alert alert-danger" role="alert" style="text-align: center;">
-    CARS
-  </div>
+<img
+  *ngIf="!car.imagePath"
+  [src]="baseUrl+'default-car.jpg'"
+  class="card-img-top"
+  style="object-fit: cover"
+  width="100"
+  height="50%"
+/>
 
-<table *ngIf="dataLoaded != false"  class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>BrandName</th>
-            <th>ColorName</th>
-            <th>Model Year</th>
-            <th>Daily Price</th>
-        </tr>
-    </thead>
-    <tr *ngFor="let carDetail of carDetails">
-        <td>{{carDetail.carId}}</td>
-        <td>{{carDetail.brandName}}</td>
-        <td>{{carDetail.colorName}}</td>
-        <td>{{carDetail.modelYear}}</td>
-        <td>{{carDetail.dailyPrice}}</td>
-    </tr>
-</table>
+<div class="card-body text-center">
+  <h4 class="cart-title">{{ car.brandName }}</h4>
+</div>
+
+<ul class="list-group list-group-flush text-center">
+  <li class="list-group-item"><i><b>Model Year | </b></i>{{ car.modelYear }}</li>
+  <li class="list-group-item"><i><b>Brand | </b></i>{{ car.brandName }}</li>
+  <li class="list-group-item"><i><b>Color| </b></i>{{ car.colorName }}</li>
+  <li class="list-group-item"><i><b>Description | </b></i>{{ car.description }}</li>
+  <li class="list-group-item"><i><b>Daily Price:  </b></i>{{ car.dailyPrice + " ₺" }}</li>
+</ul>
+
+<div class="card-body">
+  <div class="row">
+
+    <button
+      type="button"
+      class="btn btn-success"
+      routerLink="/cars/carDetail/{{car.carId}}"
+    >
+     Rent the Car
+    </button>
+
+  </div>
+</div>
+</div>
+
+
+
