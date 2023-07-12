@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +15,10 @@ import { RentalComponent } from './components/rental/rental.component';
 import { CarimageComponent } from './components/carimage/carimage.component';
 import { UserComponent } from './components/user/user.component';
 import { CardetailComponent } from './components/cardetail/cardetail.component';
+import { BrandFilterPipe } from './pipes/brand-filter.pipe';
+import { ColorFilterPipe } from './pipes/color-filter.pipe';
+import { RentaladdComponent } from './components/rentaladd/rentaladd.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +32,23 @@ import { CardetailComponent } from './components/cardetail/cardetail.component';
     CarimageComponent,
     UserComponent,
     CardetailComponent,
+    BrandFilterPipe,
+    ColorFilterPipe,
+    RentaladdComponent,
+    PaymentComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ToastrModule.forRoot({
+      positionClass:"toast-bottom-right",
+      closeButton:true,
+      progressBar:true,
+      progressAnimation:"increasing"
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

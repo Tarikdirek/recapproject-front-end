@@ -1,12 +1,22 @@
-<div class="alert alert-success" role="alert" style="text-align: center;">
+<div class="alert alert-success" role="alert" style="text-align: center">
   COLORS
 </div>
 
 <ul class="list-group">
-<li class="list-group-item">All Colors</li>
-<li (click)="setCurrentColor(color)" 
-routerLink="/cars/color/{{color.colorId}}"
-*ngFor="let color of colors" 
- [class]="getCurrentColorClass(color)">{{color.colorName}}</li>
+  <input
+  class="form-control"
+  [(ngModel)]="colorFilterText"
+  id="colorFilterText"
+  type="text"
+  placeholder="Please type a color"
+/>
+  <li
+    class="list-group-item"
+    (click)="setCurrentColor(color)"
+    routerLink="/cars/color/{{ color.colorId }}"
+    *ngFor="let color of colors | colorFilter:colorFilterText"
+    [class]="getCurrentColorClass(color)"
+  >
+    {{ color.colorName }}
+  </li>
 </ul>
-

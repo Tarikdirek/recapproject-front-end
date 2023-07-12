@@ -1,13 +1,30 @@
-<div class="alert alert-info" role="alert" style="text-align: center;">
+<div class="alert alert-success" role="alert" style="text-align: center">
   BRANDS
 </div>
 
-
 <ul class="list-group">
-  <li (click)="setCurrentAllCarClass()" [class]="getAllCarClass()" routerLink="/cars">All Brands</li>
-  <li (click)="setCurrentBrand(brand)" 
-  routerLink="/cars/brand/{{brand.brandId}}"
-  *ngFor="let brand of brands"  
-  [class]="getCurrentBrandClass(brand)">{{brand.brandName}}</li>
+  <input
+    class="form-control"
+    [(ngModel)]="brandFilterText"
+    id="brandFilterText"
+    type="text"
+    placeholder="Please type a brand"
+  />
+  <li
+    class="list-group-item"
+    (click)="setCurrentAllCarClass()"
+    [class]="getAllCarClass()"
+    routerLink="/cars"
+  >
+    All Brands
+  </li>
+  <li
+    class="list-group-item"
+    (click)="setCurrentBrand(brand)"
+    routerLink="/cars/brand/{{ brand.brandId }}"
+    *ngFor="let brand of brands | brandFilter:brandFilterText"
+    [class]="getCurrentBrandClass(brand)"
+  >
+    {{ brand.brandName }}
+  </li>
 </ul>
-
