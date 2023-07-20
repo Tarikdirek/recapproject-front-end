@@ -42,7 +42,7 @@ export class RentaladdComponent implements OnInit {
   
   createRentalAddForm(){
     this.rentalAddForm = this.formBuilder.group({
-      carId:["",Validators.bind(this.carDetail[0].carId)],
+      carId:["",Validators.required],
       customerId:["",Validators.required],
       rentDate:["",Validators.required],
       returnDate:["",Validators.required],

@@ -4,6 +4,9 @@ import { CarComponent } from './components/car/car.component';
 import { CardetailComponent } from './components/cardetail/cardetail.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { RentaladdComponent } from './components/rentaladd/rentaladd.component';
+import { CarAddComponent } from './components/car-add/car-add.component';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { ColorAddComponent } from './components/color-add/color-add.component';
 
 const routes: Routes = [
  {path:"",component:CarComponent},
@@ -13,7 +16,11 @@ const routes: Routes = [
  {path:"cars/color/:colorId",component:CarComponent},
  {path:"cars/payment/:carId",component:PaymentComponent},
  {path:"rentals/add", component:RentaladdComponent},
- {path:"payment/add", component:PaymentComponent}
+ {path:"payment/add", component:PaymentComponent},
+ {path:"cars/add", component:CarAddComponent},
+ {path:"brands/add", component:BrandAddComponent},
+ {path:"colors/add", component:ColorAddComponent},
+ {path:"cardetails/brand/:brandId", component:CardetailComponent}
 
 
 ];

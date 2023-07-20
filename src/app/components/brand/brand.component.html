@@ -1,3 +1,4 @@
+
 <div class="alert alert-success" role="alert" style="text-align: center">
   BRANDS
 </div>
@@ -24,7 +25,12 @@
     routerLink="/cars/brand/{{ brand.brandId }}"
     *ngFor="let brand of brands | brandFilter:brandFilterText"
     [class]="getCurrentBrandClass(brand)"
+    
   >
-    {{ brand.brandName }}
+  {{ brand.brandName }} 
   </li>
-</ul>
+  
+</ul> 
+
+
+
