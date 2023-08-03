@@ -40,12 +40,12 @@ export class CarAddComponent implements OnInit {
         console.log(response)
         this.toastrService.success("Car Added","Successful!")
       },responseError=>{
-        if (responseError.error.Errors.length>0) {
-          for (let i = 0; i < responseError.error.Errors.length; i++) {
-            this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Invalid")
-          }
-          
-        }
+        if(responseError.error.Errors.length>0){
+          for (let i = 0; i <responseError.error.Errors.length; i++) {
+            this.toastrService.error(responseError.error.Errors[i].ErrorMessage
+              ,"Caution")
+          }       
+        } 
         
       })
     }

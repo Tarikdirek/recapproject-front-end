@@ -1,29 +1,44 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><b>Car Rental Store</b> </a>
+    <a class="navbar-brand" href="#">CAR RENTAL</a>
     <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      </ul>
-      <form class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      
     </div>
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <button type="button" class="btn btn-primary" *ngIf="!authCheck()" routerLink="login">Login</button>
+      </li>
+       <li class="nav-item">
+        <button type="button" class="btn btn-primary" *ngIf="!authCheck()" routerLink="register">Register</button>
+      </li>
+       <li class="nav-item" >
+       <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown" *ngIf="dataLoaded">
+            <button class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="authCheck()">
+              {{user.firstName+" "+user.lastName}}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li><a class="dropdown-item" routerLink="profile">Edit Profile</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      </li>
+      <div> </div>
+      <li class="nav-item"><button type="button" *ngIf="authCheck()" class="btn btn-primary" (click)="logOut()" routerLink="">Log Out</button></li>
+    </ul>
   </div>
 </nav>
+

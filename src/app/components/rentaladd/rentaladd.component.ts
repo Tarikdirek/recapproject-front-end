@@ -4,8 +4,6 @@ import {  ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CarDetail } from 'src/app/models/carDetail';
 import { RentalAdd } from 'src/app/models/rental-add';
-import { ResponseAddModel } from 'src/app/models/responseAddModel';
-import { ResponseModel } from 'src/app/models/responseModel';
 import { CarDetailService } from 'src/app/services/car-detail.service';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -21,6 +19,7 @@ export class RentaladdComponent implements OnInit {
   carDetail:CarDetail[];
   modelOfRental:RentalAdd;
   response:boolean;
+  currentCarId:number;
 
   constructor(private formBuilder:FormBuilder,
     private rentalService:RentalService,
@@ -33,8 +32,8 @@ export class RentaladdComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
-        this.getCarDetail(params['carId'])
-        
+        this.getCarDetail(params['carId']);
+        this.currentCarId = Number(params["carId"]);
       }
     })
     this.createRentalAddForm();
@@ -42,13 +41,11 @@ export class RentaladdComponent implements OnInit {
   
   createRentalAddForm(){
     this.rentalAddForm = this.formBuilder.group({
-      carId:["",Validators.required],
-      customerId:["",Validators.required],
       rentDate:["",Validators.required],
-      returnDate:["",Validators.required],
+      returnDate:[null],
     })
   }
-  IsCarAvailable(){
+   /*IsCarAvailable(){
     if (this.rentalAddForm.valid) {
       this.rentalService.IsCarAvailable(this.carDetail[0].carId)
       .subscribe(response => {
@@ -58,12 +55,18 @@ export class RentaladdComponent implements OnInit {
       })
       
     }
-  }
+  }*/
   sendData(){
       
       if (this.rentalAddForm.valid) { 
-       this.modelOfRental=Object.assign({},this.rentalAddForm.value)
-        this.rentalService.add(this.modelOfRental).subscribe(data=>{
+       
+       let rentalAdd:RentalAdd =Object.assign({},this.rentalAddForm.value)
+        
+        rentalAdd.carId=this.currentCarId;
+        rentalAdd.customerId=2002;
+        rentalAdd.returnDate = rentalAdd.returnDate? rentalAdd.returnDate:null;
+       
+        this.rentalService.add(rentalAdd).subscribe(data=>{
          console.log(data)
         this.toastrService.success("Redirecting for payment")
         this.router.navigate(["/payment/add"])
